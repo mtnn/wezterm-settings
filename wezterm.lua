@@ -7,7 +7,7 @@ config.use_ime = true
 ----------------------------------------------------
 -- Window
 ----------------------------------------------------
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.85
 config.macos_window_background_blur = 20
 config.initial_cols = 180
 config.initial_rows = 50
