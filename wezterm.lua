@@ -126,4 +126,14 @@ wezterm.on("gui-startup", function(cmd)
   gui_window:set_position(x, y)
 end)
 
+----------------------------------------------------
+-- Optional
+----------------------------------------------------
+-- ターミナルへフォーカス時にIMEをローマ字入力に切り替える
+wezterm.on("window-focus-changed", function(window, pane)
+  if window:is_focused() then
+    wezterm.run_child_process({ "sh", "-c", "/opt/homebrew/bin/macism com.apple.inputmethod.Kotoeri.RomajiTyping.Roman" })
+  end
+end)
+
 return config
