@@ -97,7 +97,7 @@ end)
 config.disable_default_key_bindings = true
 config.keys = require("keybinds").keys
 config.key_tables = require("keybinds").key_tables
-config.leader = { key = "q", mods = "CTRL", timeout_milliseconds = 2000 }
+config.leader = { key = "e", mods = "SUPER", timeout_milliseconds = 2000 }
 
 ----------------------------------------------------
 -- Window Position
