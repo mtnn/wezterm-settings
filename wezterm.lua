@@ -1,6 +1,10 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
+-- OS判定
+local is_mac = wezterm.target_triple:find("darwin") ~= nil
+local is_windows = wezterm.target_triple:find("windows") ~= nil
+
 config.automatically_reload_config = true
 config.use_ime = true
 
@@ -129,11 +133,13 @@ end)
 ----------------------------------------------------
 -- Optional
 ----------------------------------------------------
--- ターミナルへフォーカス時にIMEをローマ字入力に切り替える
-wezterm.on("window-focus-changed", function(window, pane)
-  if window:is_focused() then
-    wezterm.run_child_process({ "sh", "-c", "/opt/homebrew/bin/macism com.apple.inputmethod.Kotoeri.RomajiTyping.Roman" })
-  end
-end)
+-- ターミナルへフォーカス時にIMEをローマ字入力に切り替える（macismを利用するためmacOSのみ適用）
+if is_mac then
+  wezterm.on("window-focus-changed", function(window, pane)
+    if window:is_focused() then
+      wezterm.run_child_process({ "sh", "-c", "/opt/homebrew/bin/macism com.apple.inputmethod.Kotoeri.RomajiTyping.Roman" })
+    end
+  end)
+end
 
 return config
