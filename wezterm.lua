@@ -15,11 +15,8 @@ config.initial_rows = 50
 ----------------------------------------------------
 -- Font
 ----------------------------------------------------
--- JetBrains Mono を優先。未インストールでも各OS標準フォントへ自動フォールバック
 config.font = wezterm.font_with_fallback({
-  "JetBrains Mono",
-  "Consolas", -- Windows 標準
-  "Menlo", -- macOS 標準
+  "JetBrainsMono Nerd Font",
   "Noto Color Emoji",
 })
 config.font_size = 12.0
@@ -67,9 +64,9 @@ config.colors = {
 
 -- タブの形をカスタマイズ
 -- タブの左側の装飾
-local SOLID_LEFT_ARROW = "\u{25E2}" -- ◢ BLACK LOWER RIGHT TRIANGLE
+local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
 -- タブの右側の装飾
-local SOLID_RIGHT_ARROW = "\u{25E4}" -- ◤ BLACK UPPER LEFT TRIANGLE
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
   local background = "#5c6d74"
