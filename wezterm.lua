@@ -137,7 +137,7 @@ end)
 if is_mac then
   wezterm.on("window-focus-changed", function(window, pane)
     if window:is_focused() then
-      wezterm.run_child_process({ "sh", "-c", "/opt/homebrew/bin/macism com.apple.inputmethod.Kotoeri.RomajiTyping.Roman" })
+      wezterm.run_child_process({ "sh", "-c", "/opt/homebrew/bin/macism com.apple.keylayout.ABC" })
     end
   end)
 end
