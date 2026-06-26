@@ -21,6 +21,7 @@ config.initial_rows = 50
 ----------------------------------------------------
 config.font = wezterm.font_with_fallback({
   "JetBrainsMono Nerd Font",
+  "PlemolJP Console NF",
   "Noto Color Emoji",
 })
 config.font_size = 12.0
