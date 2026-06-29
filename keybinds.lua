@@ -1,13 +1,43 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
--- Show which key table is active in the status area
-wezterm.on("update-right-status", function(window, pane)
+-- Show leader-pending / active key table on the left status area
+-- タブのレイアウトを参考に、長方形のブロックで表示する
+wezterm.on("update-status", function(window, pane)
+  local label = nil
+  -- アクティブな背景色（タブのアクティブ色に合わせる）
+  local background = "#ae8b2d"
+  local foreground = "#FFFFFF"
+
+  -- Leader 待機中（Cmd+e を押して次キー待ちの状態）
+  if window:leader_is_active() then
+    label = "LEADER"
+  end
+
+  -- key_table がアクティブな場合はそちらを優先表示
   local name = window:active_key_table()
   if name then
-    name = "TABLE: " .. name
+    label = "TABLE: " .. name
   end
-  window:set_right_status(name or "")
+
+  -- ブロック右端の矢印（右向きの実三角）
+  local RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
+
+  if label then
+    window:set_left_status(wezterm.format({
+      { Background = { Color = background } },
+      { Foreground = { Color = foreground } },
+      { Text = "  " .. label .. "  " },
+      -- 矢印部分：ブロック色を前景、周囲（タブバー背景）を背景にして尖りを作る
+      { Background = { Color = "none" } },
+      { Foreground = { Color = background } },
+      { Text = RIGHT_ARROW },
+      -- ステータスと先頭タブの間隔（透明スペース）
+      { Text = "  " },
+    }))
+  else
+    window:set_left_status("")
+  end
 end)
 
 return {
