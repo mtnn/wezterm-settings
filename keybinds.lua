@@ -94,6 +94,32 @@ return {
     -- 画面フルスクリーン切り替え
     { key = "Enter", mods = "ALT", action = act.ToggleFullScreen },
 
+    -- URLをキーボードで選択して開く（leader + u）
+    -- 画面上のURLにヒント文字が付き、そのキーを押すとブラウザで開く
+    {
+      key = "u",
+      mods = "LEADER",
+      action = act.QuickSelectArgs({
+        label = "open url",
+        patterns = { "https?://\\S+" },
+        action = wezterm.action_callback(function(window, pane)
+          local url = window:get_selection_text_for_pane(pane)
+          if url and url ~= "" then
+            wezterm.open_with(url)
+          end
+        end),
+      }),
+    },
+    -- URLをキーボードで選択してコピー（leader + U）
+    {
+      key = "U",
+      mods = "LEADER|SHIFT",
+      action = act.QuickSelectArgs({
+        label = "copy url",
+        patterns = { "https?://\\S+" },
+      }),
+    },
+
     -- コピーモード
     -- { key = 'X', mods = 'LEADER', action = act.ActivateKeyTable{ name = 'copy_mode', one_shot =false }, },
     { key = "[", mods = "LEADER", action = act.ActivateCopyMode },
